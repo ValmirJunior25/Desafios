@@ -1,8 +1,9 @@
 using System;
-class desafio001
+class Desafio001
 {
     static void Main()
     {
+
         string produto = "Caneta Azul";
         decimal preco = 2.5m;
         int estoque = 150;
