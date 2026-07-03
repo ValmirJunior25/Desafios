@@ -1,7 +1,7 @@
 using System;
 class Desafio001
 {
-    static void Main()
+    public void Desafio1()
     {
 
         string produto = "Caneta Azul";

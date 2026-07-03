@@ -2,7 +2,7 @@ using System;
 
 class Desafio002
 {
-    static void Main()
+    public void Desafio2()
     {
         string nome = "Valmir Júnior";
         int idade = 25;
