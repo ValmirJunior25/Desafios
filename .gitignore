@@ -1,0 +1,26 @@
+## Pastas de build do .NET
+bin/
+obj/
+
+## Arquivos de usuário do Visual Studio
+*.user
+*.suo
+
+## Pasta de configurações do Visual Studio
+.vs/
+
+## Pasta de configurações do VS Code (opcional manter, mas geralmente ignorada)
+# .vscode/
+
+## Arquivos de log e temporários
+*.log
+*.tmp
+
+## NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+## Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
