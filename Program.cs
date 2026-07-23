@@ -101,31 +101,12 @@ class Program
 
                     foreach (KeyValuePair<string, List<double>> aluno in alunos)
                     {
-                        Console.Write($"{aluno.Key} - Notas: ");
-                        foreach (double nota in aluno.Value)
-                        {
-                            Console.Write($"({nota}) ");
-                        }
-                        Console.Write($"- Média: {aluno.Value.Average():F1} - ");
-                        if (aluno.Value.Average() < 5)
-                        {
-                            Console.Write($"Reprovado");
-                        }
-                        else if (aluno.Value.Average() >= 5 && aluno.Value.Average() < 7)
-                        {
-                            Console.Write($"Recuperação");
-                        }
-                        else if (aluno.Value.Average() >= 7)
-                        {
-                            Console.Write($"Aprovado");
-                        }
-                        Console.WriteLine("");
+                        ExibirAluno(aluno.Key, aluno.Value);
                     }
 
-                    Console.Write("Pressione qualquer tecla para voltar ao menu.");
-                    string saida2 = Console.ReadLine() ?? "";
+                    Console.Write("Pressione Enter para voltar ao menu.");
+                    Console.ReadLine();
                     break;
-
 
 
                 case "3":
@@ -139,25 +120,7 @@ class Program
                         {
                             if (aluno.Key.Contains(buscador3, StringComparison.OrdinalIgnoreCase))
                             {
-                                Console.Write($"{aluno.Key} - Notas: ");
-                                foreach (double nota in aluno.Value)
-                                {
-                                    Console.Write($"({nota}) ");
-                                }
-                                Console.Write($"- Média: {aluno.Value.Average():F1} - ");
-                                if (aluno.Value.Average() < 5)
-                                {
-                                    Console.Write($"Reprovado");
-                                }
-                                else if (aluno.Value.Average() >= 5 && aluno.Value.Average() < 7)
-                                {
-                                    Console.Write($"Recuperação");
-                                }
-                                else if (aluno.Value.Average() >= 7)
-                                {
-                                    Console.Write($"Aprovado");
-                                }
-                                Console.WriteLine("");
+                                ExibirAluno(aluno.Key, aluno.Value);
                             }
                         } 
                         Console.Write("Voltar para o menu [s/n]? ");
@@ -185,5 +148,35 @@ class Program
                     
             }
         }
+    }
+
+
+    static string Situacao (double media)
+    {
+        if (media < 5)
+        {
+            return "Reprovado";
+        }
+        else if (media >= 5 && media < 7)
+        {
+            return "Recuperação";
+        }
+        else
+        {
+            return "Aprovado";
+        }
+    }
+
+
+    static void ExibirAluno(string nome, List<double> notas)
+    {
+        Console.Write($"{nome} - Notas: ");
+        foreach (double nota in notas)
+        {
+            Console.Write($"({nota}) ");
+        }
+        double media = notas.Average();
+        Console.Write($"- Média: {media:F1} - ");
+        Console.WriteLine($"{Situacao(media)}\n"); 
     }
 }
