@@ -46,7 +46,7 @@ class Program
                         }
 
                         Console.Write("Voltar para o menu [s/n]: ");
-                        char saida = char.Parse((Console.ReadLine() ?? "n").ToLower().Trim());
+                        string saida = (Console.ReadLine() ?? "n").ToLower().Trim();
                         if (saida == 's')
                         {
                             break;
@@ -61,7 +61,6 @@ class Program
                         Console.Clear();
                         Console.Write("[ 1 ] Quilômetros --> Milhas \n[ 2 ] Milhas --> Quilômetros \n\n--> "); 
                         string escolha = Console.ReadLine() ?? "";
-                        string escolhatxt;
                         
                         if (escolha == "1")
                         {
@@ -87,7 +86,7 @@ class Program
 
 
                         Console.Write("Voltar para o menu [s/n]: ");
-                        char saida = char.Parse((Console.ReadLine() ?? "n").ToLower().Trim());
+                        string saida = (Console.ReadLine() ?? "n").ToLower().Trim();
                         if (saida == 's')
                         {
                             break;
@@ -102,7 +101,6 @@ class Program
                         Console.Clear();
                         Console.Write("[ 1 ] Quilogramas --> Libras \n[ 2 ] Libras --> Quilogramas \n\n--> "); 
                         string escolha = Console.ReadLine() ?? "";
-                        string escolhatxt;
                         
                         if (escolha == "1")
                         {
@@ -128,7 +126,7 @@ class Program
 
 
                         Console.Write("Voltar para o menu [s/n]: ");
-                        char saida = char.Parse((Console.ReadLine() ?? "n").ToLower().Trim());
+                        string saida = (Console.ReadLine() ?? "n").ToLower().Trim();
                         if (saida == 's')
                         {
                             break;
@@ -139,11 +137,12 @@ class Program
                 case "4":
                 
                     Console.Write("Confirmar saida [s/n]: ");
-                    char saidaMenu = char.Parse((Console.ReadLine() ?? "n").ToLower().Trim());
-                    if (saidaMenu == 's')
+                    string saidaMenu = (Console.ReadLine() ?? "n").ToLower().Trim();
+                    if (saidaMenu == "s")
                     {
                         on = false;
                     }
+
                     break;
 
 
@@ -160,7 +159,7 @@ class Program
         while (true)
         {
             Console.Write($"Digite o valor em {unidadeDeMedida}: ");
-            string numDigitado = Console.ReadLine();
+            string numDigitado = Console.ReadLine() ?? "";
             if (double.TryParse(numDigitado, NumberStyles.Any, CultureInfo.InvariantCulture, out double valor))
             {
                 return valor;
