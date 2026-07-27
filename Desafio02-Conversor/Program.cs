@@ -21,50 +21,25 @@ class Program
                         Console.Clear();
                         Console.Write("[ 1 ] Celsius --> Fahrenheit \n[ 2 ] Fahrenheit --> Celsius \n\n--> "); 
                         string escolha = Console.ReadLine() ?? "";
-                        string escolhatxt;
                         
                         if (escolha == "1")
                         {
-                            escolhatxt = "Fahrenheit";
-                            Console.Write("Digite a teperatura em °C: ");
-                            string numerotxt = Console.ReadLine();
-                            double numeroConver = 0;
+                            string unidadeDeMedida = "Celsius";
+                            double numero = LerValorValido(unidadeDeMedida);
+                            double valorConvertido = CelsiusFahrenheit(numero, unidadeDeMedida);
 
-                            if (ValidarNumero(numerotxt))
-                            {
-                                double numero = double.Parse(numerotxt);
-                                numeroConver = CelsiusFahrenheit(numero, escolhatxt);
-
-                                Console.WriteLine($"{numero}°C = {numeroConver:F2}°F");
-                                Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Numero invalido!");
-                            }
-
+                            Console.WriteLine($"{numero}°C = {valorConvertido:F2}°F");
                         }
 
                         else if (escolha == "2")
                         {
-                            escolhatxt = "Celsius";
-                            Console.Write("Digite a teperatura em °F: ");
-                            string numerotxt = Console.ReadLine();
-                            double numeroConver = 0;
+                            string unidadeDeMedida = "Fahrenheit";
+                            double numero = LerValorValido(unidadeDeMedida);
+                            double valorConvertido = CelsiusFahrenheit(numero, unidadeDeMedida);
 
-                            if (ValidarNumero(numerotxt))
-                            {
-                                double numero = double.Parse(numerotxt);
-                                numeroConver = CelsiusFahrenheit(numero, escolhatxt);
-
-                                Console.WriteLine($"{numero}°F = {numeroConver:F2}°C");
-                                Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Numero invalido!");
-                            }
+                            Console.WriteLine($"{numero}°F = {valorConvertido:F2}°C");
                         }
+
                         else
                         {
                             Console.WriteLine("Opção invalida!");
@@ -90,45 +65,20 @@ class Program
                         
                         if (escolha == "1")
                         {
-                            escolhatxt = "Milhas";
-                            Console.Write("Digite a distancia em Km: ");
-                            string numerotxt = Console.ReadLine();
-                            double numeroConver = 0;
+                            string unidadeDeMedida = "Quilômetros";
+                            double numero = LerValorValido(unidadeDeMedida);
+                            double valorConvertido = QuilometrosMilhas(numero, unidadeDeMedida);
 
-                            if (ValidarNumero(numerotxt))
-                            {
-                                double numero = double.Parse(numerotxt);
-                                numeroConver = QuilômetrosMilhas(numero, escolhatxt);
-
-                                Console.WriteLine($"{numero} Km = {numeroConver:F2} milhas");
-                                Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Numero invalido!");
-                            }
-
+                            Console.WriteLine($"{numero}Km = {valorConvertido:F2} Milhas");
                         }
 
                         else if (escolha == "2")
                         {
-                            escolhatxt = "Quilômetros";
-                            Console.Write("Digite a distancia em milhas: ");
-                            string numerotxt = Console.ReadLine();
-                            double numeroConver = 0;
+                            string unidadeDeMedida = "Milhas";
+                            double numero = LerValorValido(unidadeDeMedida);
+                            double valorConvertido = QuilometrosMilhas(numero, unidadeDeMedida);
 
-                            if (ValidarNumero(numerotxt))
-                            {
-                                double numero = double.Parse(numerotxt);
-                                numeroConver = QuilômetrosMilhas(numero, escolhatxt);
-
-                                Console.WriteLine($"{numero} milhas = {numeroConver:F2} Km");
-                                Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Numero invalido!");
-                            }
+                            Console.WriteLine($"{numero} Milhas = {valorConvertido:F2} Km");
                         }
                         else
                         {
@@ -150,21 +100,32 @@ class Program
                     while (true)
                     {
                         Console.Clear();
-                        Console.Write("[ 1 ] Quilogramas --> Libras \n[ 2 ] Libas --> Quilogramas \n\n--> "); 
+                        Console.Write("[ 1 ] Quilogramas --> Libras \n[ 2 ] Libras --> Quilogramas \n\n--> "); 
                         string escolha = Console.ReadLine() ?? "";
-                        switch (escolha)
+                        string escolhatxt;
+                        
+                        if (escolha == "1")
                         {
-                            case "1":
-                                Console.WriteLine("Digite o pesoa em KG: ");
-                                Console.ReadLine();
-                                break;
+                            string unidadeDeMedida = "Quilogramas";
+                            double numero = LerValorValido(unidadeDeMedida);
+                            double valorConvertido = QuilogramasLibras(numero, unidadeDeMedida);
 
-                            
-                            case "2":
-                                Console.WriteLine("Digite o peso em libras: ");
-                                Console.ReadLine();
-                                break;
+                            Console.WriteLine($"{numero} Kg = {valorConvertido:F2} Lb");
                         }
+
+                        else if (escolha == "2")
+                        {
+                            string unidadeDeMedida = "Libras";
+                            double numero = LerValorValido(unidadeDeMedida);
+                            double valorConvertido = QuilogramasLibras(numero, unidadeDeMedida);
+
+                            Console.WriteLine($"{numero} Lb = {valorConvertido:F2} Kg");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opção invalida!");
+                        }
+
 
                         Console.Write("Voltar para o menu [s/n]: ");
                         char saida = char.Parse((Console.ReadLine() ?? "n").ToLower().Trim());
@@ -174,7 +135,6 @@ class Program
                         }
                     }               
                     break;
-
 
                 case "4":
                 
@@ -195,30 +155,36 @@ class Program
         }
     }
 
-    static bool ValidarNumero(string txt)
+    static double LerValorValido(string unidadeDeMedida)
     {
-        if (double.TryParse(txt, NumberStyles.Any, CultureInfo.InvariantCulture, out double numero))
+        while (true)
         {
-            return true;
-        }
-        else
-        {
-            return false;
+            Console.Write($"Digite o valor em {unidadeDeMedida}: ");
+            string numDigitado = Console.ReadLine();
+            if (double.TryParse(numDigitado, NumberStyles.Any, CultureInfo.InvariantCulture, out double valor))
+            {
+                return valor;
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Valor invalido! Tente novamente.");
+            } 
         }
     }
 
 
-    static double CelsiusFahrenheit(double numero, string txt)
+    static double CelsiusFahrenheit(double numero, string unidadeDeMedida)
     {
-        if (txt == "Fahrenheit")
+        if (unidadeDeMedida == "Celsius")
         {
-            double F = (numero * 1.8) + 32;
-            return F;
+            double fahrenheit = (numero * 1.8) + 32;
+            return fahrenheit;
         }
-        else if(txt == "Celsius")
+        else if(unidadeDeMedida == "Fahrenheit")
         {
-            double C = (numero - 32) / 1.8;
-            return C;
+            double celsius = (numero - 32) / 1.8;
+            return celsius;
         }
         else
         {
@@ -228,22 +194,40 @@ class Program
     }
 
 
-    static double QuilômetrosMilhas(double numero, string txt)
+    static double QuilometrosMilhas(double numero, string unidadeDeMedida)
     {
-        if (txt == "Milhas")
+        if (unidadeDeMedida == "Quilômetros")
         {
-            double Ml = numero * 0.621371;
-            return Ml;
+            double milhas = numero * 0.621371;
+            return milhas;
         }
-        else if(txt == "Quilômetros")
+        else if(unidadeDeMedida == "Milhas")
         {
-            double Km = numero / 0.621371;
-            return Km;
+            double quilometros = numero / 0.621371;
+            return quilometros;
         }
         else
         {
             throw new ArgumentException("Unidade inválida");
         }
 
+    }
+
+    static double QuilogramasLibras(double numero, string unidadeDeMedida)
+    {
+         if (unidadeDeMedida == "Quilogramas")
+        {
+            double libras = numero * 2.20462;
+            return libras;
+        }
+        else if(unidadeDeMedida == "Libras")
+        {
+            double Quilogramas = numero / 2.20462;
+            return Quilogramas;
+        }
+        else
+        {
+            throw new ArgumentException("Unidade inválida");
+        }
     }
 }
