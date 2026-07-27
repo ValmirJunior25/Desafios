@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Globalization;
+﻿using System.Globalization;
 
 class Program
 {
     static void Main()
     {
-        CultureInfo cultura = new CultureInfo("pt-BR");
-        bool on = true;
+        CultureInfo cultura = new CultureInfo("pt-BR"); // simplificada: CultureInfo cultura = new("pt-BR");
 
-        Dictionary<string, List<double>> alunos = new Dictionary<string, List<double>>
+        Dictionary<string, List<double>> alunos = new Dictionary<string, List<double>> // simplificada: Dictionary<string, List<double>> alunos = new()
         {
             {"Ana Silva",  [7.5, 8.0, 6.5]},
             {"Carlos Mendes", [4.0, 3.5, 5.0]},
@@ -21,6 +19,8 @@ class Program
             {"Camila Ferreira", [7.0, 8.5, 7.5]},
             {"Lucas Pereira", [2.0, 3.0, 2.5]}
         };
+        
+        bool on = true;
         while (on)
         {
             Console.Clear();
