@@ -6,10 +6,11 @@ class Program
 {
     static void Main()
     {
-        List <double> notas = [];
+   
         while (true)
         {
             Console.Clear();
+            List <double> notas = [];
             Console.Write("Quantas notas deseja inserir? ");
             if (int.TryParse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture, out int numDeNotas))
             {
@@ -74,7 +75,7 @@ class Program
 
     static double EncotrarMaior(List<double> notas)
     {
-        double maior = 0;
+        double maior = notas[0];
         foreach (double nota in notas)
         {
             if (nota > maior)
@@ -88,7 +89,7 @@ class Program
 
     static double EncontrarMenor(List<double> notas)
     {
-        double menor = 10;
+        double menor = notas[0];
         foreach (double nota in notas)
         {
             if (nota < menor)
