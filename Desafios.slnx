@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="Desafio01-Media_Aluno/Desafio01-MediaAluno.csproj" />
+  <Project Path="Desafio02-Conversor/Desafio02-Conversor.csproj" />
+  <Project Path="Desafio03-Notas/Desafio03-Notas.csproj" />
 </Solution>
