@@ -10,7 +10,7 @@ class Prgram
         //Placa MOT-0002 - Modelo: Biz
 
 
-        List<Veicolo> veicolos = [];
+        List<Veiculo> veiculos = [];
 
         Carro v1 = new();
         v1.Modelo = "Civic";
@@ -21,21 +21,21 @@ class Prgram
         Moto v3 = new() {Modelo = "CB500", Placa = "MOT-0001", Cilindrada = 500};
         Moto v4 = new() {Modelo = "Biz", Placa = "MOT-0002", Cilindrada = 125};
 
-        veicolos.Add(v1);
-        veicolos.Add(v2);
-        veicolos.Add(v3);
-        veicolos.Add(v4);
+        veiculos.Add(v1);
+        veiculos.Add(v2);
+        veiculos.Add(v3);
+        veiculos.Add(v4);
 
-        foreach(Veicolo veicolo in veicolos)
+        foreach(Veiculo veiculo in veiculos)
         {
-            veicolo.ExibirDados();
+            veiculo.ExibirDados();
         }
     }
 
 }
 
 
-class Veicolo
+class Veiculo
 {
     public string Placa = "";
     public string Modelo = "";
@@ -48,7 +48,7 @@ class Veicolo
 }
 
 
-class Carro : Veicolo
+class Carro : Veiculo
 {
     public int NumPortas;
 
@@ -59,7 +59,7 @@ class Carro : Veicolo
 }
 
 
-class Moto : Veicolo
+class Moto : Veiculo
 {
     public int Cilindrada;
 

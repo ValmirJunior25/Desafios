@@ -6,7 +6,7 @@ class Program
     {
         CultureInfo cultura = new CultureInfo("pt-BR"); // simplificada: CultureInfo cultura = new("pt-BR");
 
-        Dictionary<string, List<double>> alunos = new Dictionary<string, List<double>> // simplificada: Dictionary<string, List<double>> alunos = new()
+        Dictionary<string, List<double>> alunos = new Dictionary<string, List<double>> // simplificada: Dictionary<string, List<double>> alunos = []
         {
             {"Ana Silva",  [7.5, 8.0, 6.5]},
             {"Carlos Mendes", [4.0, 3.5, 5.0]},
