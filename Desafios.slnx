@@ -7,5 +7,6 @@
   <Project Path="Desafio06-Heranca/Desafio06-Heranca.csproj" />
   <Project Path="Desafio07-TratamentoExcecoes/Desafio07-TratamentoExcecoes.csproj" />
   <Project Path="Desafio08-LinqBasico/Desafio08-LinqBasico.csproj" />
-  <Project Path="Desafio09-/Desafio09-.csproj" />
+  <Project Path="Desafio09-LinqOop/Desafio09-LinqOop.csproj" />
+  <Project Path="Desafio10-Biblioteca/Desafio10-Biblioteca.csproj" />
 </Solution>
