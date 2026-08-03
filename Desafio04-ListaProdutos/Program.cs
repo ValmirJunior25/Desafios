@@ -56,7 +56,7 @@ class Program
 
 class Produto
 {
-    public string Nome;
+    public string Nome = "";
     public decimal Preco;
     public int Quantidade;
 
