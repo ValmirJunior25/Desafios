@@ -11,7 +11,7 @@
         LivroDigital l7 = new() {Titulo = "Effective C#", Autor = "Bill Wagner", Tipo = "Digita", Quantidade = 5, Tamanho = "3"};
         LivroFisico l8 = new() {Titulo = "O Homem e o Mar", Autor = "Ernest Hemingway", Tipo = "Físico", Quantidade = 0, Prateleira = "D4"};
 
-        List<Livro> livrosAcervo = [l1, l2, l3, l4, l5, l6, l7, l8];
+        List<Livro> livrosAcervo = new List<Livro> { l1, l2, l3, l4, l5, l6, l7, l8 };
         
         bool on = true;
         while (on)
@@ -64,6 +64,7 @@
                         {
                             break;
                         }
+                        else {Console.WriteLine("Opção invalida!"); Console.ReadLine();}
                     }
                     break;
 
@@ -72,30 +73,74 @@
                     while (true)
                     {
                         Console.Clear();
-                        string tipo;
                         Console.Write(
-                            "===== Emprestar livro =====\n\n"+
-                            "1. Emprestar livro físico\n"+
-                            "2. Emprestar livro digital\n"+
+                            "===== Buscar livro =====\n\n"+
+                            "1. Procurar pelo titulo\n"+
+                            "2. Procurar pelo autor\n"+
                             "3. Voltar\n\n"+
                             "-->"
                         );
                         string emprestimoMenu = Console.ReadLine();
-                            if (emprestimoMenu == "1")
+                        if (emprestimoMenu == "1")
+                        {
+                            try
                             {
-                                tipo = "Físico";
-                            }
-                            else if (emprestimoMenu == "2")
-                            {
-                                tipo = "Digital";
-                            }
-                            else if (emprestimoMenu == "3")
-                            {
-                                break;
-                            }
+                                Console.Write("Titulo do livro: ");
+                                string titulo = Console.ReadLine().Trim();
+                                Livro livroEscolhido = livrosAcervo.Where(l => l.Titulo == titulo).First();
 
+                                CabecalhoTitulo();
+                                livroEscolhido.ExibirLivro();
+
+                                Console.Write("Confirme o livro [s/n]: ");
+                                string conf = Console.ReadLine();
+                                if (conf == "s")
+                                {
+                                    Console.WriteLine("Livro Emprestado! ");
+                                    Console.ReadLine();
+                                }
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"ERRO! {ex.GetType().Name}");
+                                Console.ReadLine();
+                            }
                             
                         }
+                        else if (emprestimoMenu == "2")
+                        {
+                            try
+                            {
+                                Console.Write("Autor do livro: ");
+                                string autor = Console.ReadLine().Trim();
+                                Livro livroEscolhido = livrosAcervo.Where(l => l.Autor == autor).First();
+                                CabecalhoTitulo();
+                                livroEscolhido.ExibirLivro();
+
+                                Console.Write("Confirme o livro [s/n]: ");
+                                string conf = Console.ReadLine();
+                                if (conf == "s")
+                                {
+                                    Console.WriteLine("Livro Emprestado! ");
+                                    Console.ReadLine();
+                                }
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"ERRO! {ex.GetType().Name}");
+                                Console.ReadLine();
+                            }
+                            
+
+                        }
+                        else if (emprestimoMenu == "3")
+                        {
+                            break;
+                        }
+                        else {Console.WriteLine("Opção invalida!"); Console.ReadLine();}
+
+                            
+                    }
                     break;
 
                 case "3":
@@ -193,7 +238,6 @@
     {
         Console.WriteLine($"{"=========== Titulo ===========", -30} | {"====== Autor ======", -20} | {"== Tipo ==", -10} | {"Quantidade", -10} | {"==== Extra ====", -10}");
     }
-
     
 }
 
@@ -227,6 +271,8 @@ class Livro
     {
         Console.WriteLine($"{Titulo, -30} | {Autor, -20} | {Tipo, -10} | {Quantidade, -10}");
     }
+
+    
 
 
 }
