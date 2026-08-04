@@ -11,14 +11,14 @@
         LivroDigital l7 = new() {Titulo = "Effective C#", Autor = "Bill Wagner", Tipo = "Digita", Quantidade = 5, Tamanho = "3"};
         LivroFisico l8 = new() {Titulo = "O Homem e o Mar", Autor = "Ernest Hemingway", Tipo = "Físico", Quantidade = 0, Prateleira = "D4"};
 
-        List<Livro> LivrosAcervo = [l1, l2, l3, l4, l5, l6, l7, l8];
+        List<Livro> livrosAcervo = [l1, l2, l3, l4, l5, l6, l7, l8];
         
         bool on = true;
         while (on)
         {
             Console.Clear();
             Console.Write(
-                "=== Biblioteca ===\n\n"+
+                "================ Biblioteca ================\n\n"+
                 "1. Cadastrar livro\n"+
                 "2. Emprestar livro\n"+
                 "3. Devolver livro\n"+
@@ -33,13 +33,70 @@
             switch (menu)
             {
                 case "1":
-                    
+                    while (true)
+                    {
+                        Console.Clear();
+                        Console.Write(
+                            "======== Cadastro ========\n\n"+
+                            "1. Cadastrar livro físico\n"+
+                            "2. Cadastrar livro digital\n"+
+                            "3. Voltar\n\n"+
+                            "-->"
+                        );
+                        string cadastroMenu = Console.ReadLine();
+                        if (cadastroMenu == "1")
+                        {
+                           Livro novoLivro = CadastrarLivro("Físico");
+                            if (novoLivro != null)
+                            {
+                                livrosAcervo.Add(novoLivro);
+                            }          
+                        }
+                        else if (cadastroMenu == "2")
+                        {
+                            Livro novoLivro = CadastrarLivro("Digital");
+                            if (novoLivro != null)
+                            {
+                                livrosAcervo.Add(novoLivro);
+                            }
+                        }
+                        else if (cadastroMenu == "3")
+                        {
+                            break;
+                        }
+                    }
                     break;
 
 
                 case "2":
-                    break;
+                    while (true)
+                    {
+                        Console.Clear();
+                        string tipo;
+                        Console.Write(
+                            "===== Emprestar livro =====\n\n"+
+                            "1. Emprestar livro físico\n"+
+                            "2. Emprestar livro digital\n"+
+                            "3. Voltar\n\n"+
+                            "-->"
+                        );
+                        string emprestimoMenu = Console.ReadLine();
+                            if (emprestimoMenu == "1")
+                            {
+                                tipo = "Físico";
+                            }
+                            else if (emprestimoMenu == "2")
+                            {
+                                tipo = "Digital";
+                            }
+                            else if (emprestimoMenu == "3")
+                            {
+                                break;
+                            }
 
+                            
+                        }
+                    break;
 
                 case "3":
                     break;
@@ -54,8 +111,8 @@
 
 
                 case "6":
-                    Console.WriteLine($"{"=========== Titulo ===========", -30} | {"====== Autor ======", -20} | {"== Tipo ==", -10} | {"Quantidade", -10} |  {"== Extra ==", -3}");
-                    foreach(Livro l in LivrosAcervo)
+                    CabecalhoTitulo();
+                    foreach(Livro l in livrosAcervo)
                     {
                         l.ExibirLivro();
                     }
@@ -79,6 +136,65 @@
             Console.ReadLine();
         }
     }
+
+    static Livro CadastrarLivro(string tipo)
+    {
+        try
+        {
+            Console.Write("Titulo: ");
+            string titulo = Console.ReadLine().Trim();
+            Console.Write("Autor: ");
+            string autor = Console.ReadLine().Trim();
+            Console.Write("Quantidade: ");
+            int quantidade = int.Parse(Console.ReadLine().Trim());
+
+            if (tipo == "Físico")
+            {
+                Console.Write("Prateleira: ");
+                string prateleira = Console.ReadLine().Trim();
+                LivroFisico novoLivro = new() {Titulo = titulo, Autor = autor, Tipo = "Físico", Quantidade = quantidade, Prateleira = prateleira};
+
+                Console.WriteLine("\n======================================= Cadastrar o livro? =======================================");
+                CabecalhoTitulo();
+                novoLivro.ExibirLivro();
+                Console.Write("Confirme [s/n]: ");
+                string conf = Console.ReadLine();
+                if (conf == "s")
+                {
+                    return novoLivro;
+                }
+            }
+            else if (tipo == "Digital")
+            {
+                Console.Write("Tamanho: ");
+                string tamanho = Console.ReadLine().Trim();
+                LivroDigital novoLivro = new() {Titulo = titulo, Autor = autor, Tipo = "Digital", Quantidade = quantidade, Tamanho = tamanho};
+
+                Console.WriteLine("\n======================================= Cadastrar o livro? =======================================");
+                CabecalhoTitulo();
+                novoLivro.ExibirLivro();
+                Console.Write("Confirme [s/n]: ");
+                string conf = Console.ReadLine();
+                if (conf == "s")
+                {
+                    return novoLivro;
+                }
+            }          
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"ERRO! {ex.GetType().Name}");
+            Console.ReadLine();
+        }
+        return null;
+    }
+
+    static void CabecalhoTitulo()
+    {
+        Console.WriteLine($"{"=========== Titulo ===========", -30} | {"====== Autor ======", -20} | {"== Tipo ==", -10} | {"Quantidade", -10} | {"==== Extra ====", -10}");
+    }
+
+    
 }
 
 
@@ -98,6 +214,7 @@ class Livro
             if (value < 0)
             {
                 Console.WriteLine("Quantidade de livro insuficiente.");
+                Console.ReadLine();
             }
             else
             {
@@ -111,10 +228,6 @@ class Livro
         Console.WriteLine($"{Titulo, -30} | {Autor, -20} | {Tipo, -10} | {Quantidade, -10}");
     }
 
-    public virtual void Cadastrar(string titulo, string autor, string tipo, int quantidade)
-    {
-        
-    }
 
 }
 
@@ -126,6 +239,7 @@ class LivroFisico : Livro
     {
         Console.WriteLine($"{Titulo, -30} | {Autor, -20} | {Tipo, -10} | {Quantidade, -10} | Prateleira: {Prateleira, -3}");
     }
+
 }
 
 class LivroDigital : Livro
@@ -136,4 +250,5 @@ class LivroDigital : Livro
     {
         Console.WriteLine($"{Titulo, -30} | {Autor, -20} | {Tipo, -10} | {Quantidade, -10} | Tamanho: {Tamanho, -3}MB");
     }
+
 }
