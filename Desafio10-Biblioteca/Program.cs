@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Reflection.Metadata;
+
+class Program
 {
     static void Main()
     {
@@ -23,8 +25,8 @@
                 "2. Emprestar livro\n"+
                 "3. Devolver livro\n"+
                 "4. Buscar livro por autor\n"+
-                "6. Relatório (disponíveis / total no acervo)\n"+
-                "7. Sair\n\n"+
+                "5. Relatório (disponíveis / total no acervo)\n"+
+                "6. Sair\n\n"+
                 "-->"
             );
 
@@ -74,7 +76,7 @@
                     {
                         Console.Clear();
                         Console.Write(
-                            "===== Buscar livro =====\n\n"+
+                            "=== Emprestar livro ===\n\n"+
                             "1. Procurar pelo titulo\n"+
                             "2. Procurar pelo autor\n"+
                             "3. Voltar\n\n"+
@@ -85,18 +87,26 @@
                         {
                             try
                             {
+                                Livro livroEscolhido = new();
                                 Console.Write("Titulo do livro: ");
                                 string titulo = Console.ReadLine().Trim();
-                                Livro livroEscolhido = livrosAcervo.Where(l => l.Titulo == titulo).First();
-
-                                CabecalhoTitulo();
-                                livroEscolhido.ExibirLivro();
+                                livroEscolhido = BuscarLivro(livrosAcervo, titulo, titulo: true);
 
                                 Console.Write("Confirme o livro [s/n]: ");
                                 string conf = Console.ReadLine();
                                 if (conf == "s")
                                 {
-                                    Console.WriteLine("Livro Emprestado! ");
+                                    Console.Write(
+                                        $"A {livroEscolhido.Quantidade} desse livro no estoque.\n"+
+                                        "Numero de livros emprestados: ");
+                                    int numlivro = int.Parse(Console.ReadLine());
+          
+                                    if (livroEscolhido.Quantidade >= numlivro && numlivro > 0)
+                                    {
+                                        Console.WriteLine("Livro Emprestado! ");
+
+                                    }
+                                    livroEscolhido.Quantidade -= numlivro;
                                     Console.ReadLine();
                                 }
                             }
@@ -105,23 +115,31 @@
                                 Console.WriteLine($"ERRO! {ex.GetType().Name}");
                                 Console.ReadLine();
                             }
-                            
                         }
                         else if (emprestimoMenu == "2")
                         {
                             try
                             {
+                                Livro livroEscolhido = new();
                                 Console.Write("Autor do livro: ");
                                 string autor = Console.ReadLine().Trim();
-                                Livro livroEscolhido = livrosAcervo.Where(l => l.Autor == autor).First();
-                                CabecalhoTitulo();
-                                livroEscolhido.ExibirLivro();
+                                livroEscolhido = BuscarLivro(livrosAcervo, autor, autor: true);
 
                                 Console.Write("Confirme o livro [s/n]: ");
                                 string conf = Console.ReadLine();
                                 if (conf == "s")
                                 {
-                                    Console.WriteLine("Livro Emprestado! ");
+                                    Console.Write(
+                                        $"A {livroEscolhido.Quantidade} desse livro no estoque.\n"+
+                                        "Numero de livros emprestados: ");
+                                    int numlivro = int.Parse(Console.ReadLine());
+          
+                                    if (livroEscolhido.Quantidade >= numlivro && numlivro > 0)
+                                    {
+                                        Console.WriteLine("Livro Emprestado! ");
+
+                                    }
+                                    livroEscolhido.Quantidade -= numlivro;
                                     Console.ReadLine();
                                 }
                             }
@@ -144,18 +162,110 @@
                     break;
 
                 case "3":
+                    while (true)
+                    {
+                        Console.Clear();
+                        Console.Write(
+                            "==== Devolver livro ====\n\n"+
+                            "1. Procurar pelo titulo\n"+
+                            "2. Procurar pelo autor\n"+
+                            "3. Voltar\n\n"+
+                            "-->"
+                        );
+                        string emprestimoMenu = Console.ReadLine();
+                        if (emprestimoMenu == "1")
+                        {
+                            try
+                            {
+                                Livro livroEscolhido = new();
+                                Console.Write("Titulo do livro: ");
+                                string titulo = Console.ReadLine().Trim();
+                                livroEscolhido = BuscarLivro(livrosAcervo, titulo, titulo: true);
+
+                                Console.Write("Confirme o livro [s/n]: ");
+                                string conf = Console.ReadLine();
+                                if (conf == "s")
+                                {
+                                    Console.Write("Numero de livros devolvidos: ");
+                                    int numlivro = int.Parse(Console.ReadLine());
+          
+                                    if ( numlivro > 0)
+                                    {
+                                        Console.WriteLine("Livro Devolvido! ");
+
+                                    }
+                                    livroEscolhido.Quantidade += numlivro;
+                                    Console.ReadLine();
+                                }
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"ERRO! {ex.GetType().Name}");
+                                Console.ReadLine();
+                            }
+                        }
+                        else if (emprestimoMenu == "2")
+                        {
+                            try
+                            {
+                                Livro livroEscolhido = new();
+                                Console.Write("Titulo do livro: ");
+                                string titulo = Console.ReadLine().Trim();
+                                livroEscolhido = BuscarLivro(livrosAcervo, titulo, titulo: true);
+
+                                Console.Write("Confirme o livro [s/n]: ");
+                                string conf = Console.ReadLine();
+                                if (conf == "s")
+                                {
+                                    Console.Write("Numero de livros devolvidos: ");
+                                    int numlivro = int.Parse(Console.ReadLine());
+          
+                                    if ( numlivro > 0)
+                                    {
+                                        Console.WriteLine("Livro Devolvido! ");
+
+                                    }
+                                    livroEscolhido.Quantidade += numlivro;
+                                    Console.ReadLine();
+                                }
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"ERRO! {ex.GetType().Name}");
+                                Console.ReadLine();
+                            }
+                            
+
+                        }
+                        else if (emprestimoMenu == "3")
+                        {
+                            
+                            break;
+                        }
+                        else {Console.WriteLine("Opção invalida!"); Console.ReadLine();}
+
+                            
+                    }
                     break;
 
 
                 case "4":
-                    break;
+                    try
+                    {
+                        Livro livroEscolhido = new();
+                        Console.Write("Autor do livro: ");
+                        string autor = Console.ReadLine().Trim();
+                        livroEscolhido = BuscarLivro(livrosAcervo, autor, autor: true);
 
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine($"ERRO! {ex.GetType().Name}");
+                        Console.ReadLine();
+                    }
+                    break;
 
                 case "5":
-                    break;
-
-
-                case "6":
                     CabecalhoTitulo();
                     foreach(Livro l in livrosAcervo)
                     {
@@ -164,7 +274,7 @@
                     break;
 
 
-                case "7":
+                case "6":
                     Console.Write("Confirmar saida [s/n]: ");
                     string saidaMenu = (Console.ReadLine() ?? "n").ToLower().Trim();
                     if (saidaMenu == "s")
@@ -239,6 +349,35 @@
         Console.WriteLine($"{"=========== Titulo ===========", -30} | {"====== Autor ======", -20} | {"== Tipo ==", -10} | {"Quantidade", -10} | {"==== Extra ====", -10}");
     }
     
+
+    static Livro BuscarLivro(List<Livro> livros, string extra, bool titulo = false, bool autor = false)
+    {
+        Livro livroEscolhido = new();
+        if (titulo == true)
+        {
+            foreach (Livro l in livros)
+            {
+                if (l.Titulo.Contains(extra, StringComparison.OrdinalIgnoreCase))
+                {
+                    livroEscolhido = l;
+                }
+            }
+        }
+        else if(autor == true)
+        {
+            foreach (Livro l in livros)
+            {
+                if (l.Autor.Contains(extra, StringComparison.OrdinalIgnoreCase))
+                {
+                    livroEscolhido = l;
+                }
+            }
+        }
+        
+        CabecalhoTitulo();
+        livroEscolhido.ExibirLivro();
+        return livroEscolhido;
+    }
 }
 
 
@@ -258,7 +397,6 @@ class Livro
             if (value < 0)
             {
                 Console.WriteLine("Quantidade de livro insuficiente.");
-                Console.ReadLine();
             }
             else
             {
@@ -267,14 +405,13 @@ class Livro
         }
     }
 
+
     public virtual void ExibirLivro()
     {
         Console.WriteLine($"{Titulo, -30} | {Autor, -20} | {Tipo, -10} | {Quantidade, -10}");
     }
 
     
-
-
 }
 
 class LivroFisico : Livro
